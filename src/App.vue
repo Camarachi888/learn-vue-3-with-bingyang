@@ -85,4 +85,18 @@ function submitForm() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+form {
+  padding: 20px;
+}
+
+form div {
+  height: 40px;
+  line-height: 40px;
+}
+
+form div span {
+  display: inline-block;
+  width: 100px;
+}
+</style>
