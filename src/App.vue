@@ -1,34 +1,66 @@
 <template>
+  <h1>{{ message }}</h1>
   <div class=card>
-    <h1 ref="title">Hello, Template Refs!</h1>
-    <input type="text" ref="input"/>
-    <br/>
-    <button @click="printDomElement">
-      Print DOM elements in console log
+    <h2 ref="title">This is the App component.</h2>
+    <h2>Number: {{ number }}</h2>
+    <button @click="number++">
+      Increment number by one
     </button>
-    <button @click="changeTitle">
-      Change Title
-    </button>
+    <button @click="isShow=!isShow">Toggle component1</button>
+    <Component1 v-if="isShow"></Component1>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { 
+  onMounted, 
+  onBeforeMount, 
+  ref,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+  watch
+} from 'vue'
 
+import Component1 from './Component1.vue'
+
+let message = ref('Hello, Lifecycle Hooks!')
+let number = ref(1)
 let title = ref()
-let input = ref()
 
-function printDomElement() {
+let isShow = ref(true)
+console.log('App component is setup')
+
+onBeforeMount(()=> {
+  console.log('App component is before mount.')
+  console.log(number.value)
   console.log(title.value)
-  console.log(input.value)
-}
+})
 
-function changeTitle() {
-  title.value.innerText = 'Hello World!'
-}
+onMounted(()=> {
+  console.log('App component is mounted')
+  console.log(title.value)
+})
 
-onMounted(()=>{
-  input.value.focus()
+onBeforeUpdate(()=> {
+  console.log('App component is before update')
+})
+
+onUpdated(()=> {
+  console.log('App component is updated')
+})
+
+onBeforeUnmount(()=> {
+  console.log('App component is before unmount')
+})
+
+onUnmounted(()=> {
+  console.log('App component is unmounted')
+})
+
+watch(number, ()=> {
+  console.log('number changes!')
 })
 </script>
 
