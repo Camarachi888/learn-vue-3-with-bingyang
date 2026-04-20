@@ -10,9 +10,18 @@ const router = createRouter({
     history: createWebHistory(),
     //define routes
     routes: [
-        {path: '/', component: Home},
-        {path: '/blogPosts', component: BlogPosts},
-        {path: '/about', component: About}
+        {path: '/', name:'home', component: Home},
+        {
+            path: '/blogPosts', 
+            name: 'blogcPosts', 
+            component: BlogPosts,
+            redirect: { name: 'blogPostsGreeting' },
+            children: [
+                { path: '', name: 'blogPostsGreeting', component: BlogPostsGreeting },
+                {path: '/blogPosts/:id(\\d+)', name: 'blogPost', component: BlogPost },
+            ],
+        },
+        {path: '/about', name: 'about', component: About}
     ]
 })
 
