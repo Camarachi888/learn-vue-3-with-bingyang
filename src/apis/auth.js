@@ -5,11 +5,17 @@ const isAuthenticated = ref(false) // A global state that tracks whether the use
 const login = async (username, password) => {
   // Simulate a successful login
   isAuthenticated.value = true
+  userRole.value = username === 'vipUser' ? 'vip' : 'regular'
 }
 
 const logout = async () => {
   // Simulate a successful logout
   isAuthenticated.value = false
+  userRole.value = ''
 }
 
-export { isAuthenticated, login, logout }
+const getUserRole = () => {
+  return userRole.value
+}
+
+export { isAuthenticated, login, logout, getUserRole }
